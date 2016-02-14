@@ -6,7 +6,7 @@ ENV GERRIT_WAR /home/gerrit/gerrit.war
 ENV GERRIT_VERSION 2.12
 
 RUN apt-get update \
-    && apt-get install -y openjdk-7-jre-headless git bash openssh-server wget \
+    && apt-get install -y openjdk-7-jre-headless git bash openssh-server wget cgit gitweb \
     && useradd -m -s /bin/bash ${GERRIT_USER} \
     && mkdir -p /home/gerrit/data \
     && chown -R ${GERRIT_USER}:${GERRIT_USER} /home/gerrit/data \
