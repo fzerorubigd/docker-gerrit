@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 set -euo pipefail
 
 if [ "$1" = 'gerrit' ]; then
     # Run init on the data directory
-    java -jar ${GERRIT_WAR} init --batch -d ${GERRIT_DATA}
+    java -jar ${GERRIT_WAR} init --batch -d /home/gerrit/data
     # supervise gerrit 
-    /bin/bash ${GERRIT_DATA}/bin/bin/gerrit.sh supervise
+    /bin/bash /home/gerrit/data/bin/gerrit.sh supervise
 else
     exec "$@"
 fi;
