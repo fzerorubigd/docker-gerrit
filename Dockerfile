@@ -9,7 +9,7 @@ RUN apt-get update \
     && apt-get install -y openjdk-7-jre-headless git bash openssh-server wget \
     && useradd -m -s /bin/bash ${GERRIT_USER} \
     && mkdir -p /home/gerrit/data \
-    && chown -R ${GERRIT_USER}:${GERRIT_USER}
+    && chown -R ${GERRIT_USER}:${GERRIT_USER} /home/gerrit/data \
     && wget https://www.gerritcodereview.com/download/gerrit-${GERRIT_VERSION}.war -O ${GERRIT_WAR} \
     && rm -rf /var/lib/apt/lists/* 
     
