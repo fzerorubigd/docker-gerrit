@@ -1,7 +1,9 @@
 export ROOT=$(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 export DOCKER=$(shell which docker)
 export DOCKER_BUILD=$(ROOT)/tmp/docker-build
-all: build
+
+image: build 
+	$(DOCKER) build -t fzerorubigd/gerrit .
 
 build: pre
 	$(DOCKER) run --rm -v $(ROOT)/tmp:/build gerrit-builder
