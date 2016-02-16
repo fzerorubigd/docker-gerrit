@@ -43,15 +43,15 @@ git clone --recursive https://gerrit.googlesource.com/plugins/branch-network /bu
 
 rm -rf /build/gerrit/plugins/commit-message-length-validator/
 git clone https://gerrit.googlesource.com/plugins/commit-message-length-validator /build/gerrit/plugins/commit-message-length-validator/
-cd /build/gerrit/plugins/commit-message-length-validator/ && git checkout stable-${GERRIT_VERSION}
+cd /build/gerrit/plugins/commit-message-length-validator/ && git checkout v${GERRIT_VERSION}
 
 rm -rf /build/gerrit/plugins/replication/
 git clone https://gerrit.googlesource.com/plugins/replication /build/gerrit/plugins/replication/
-cd /build/gerrit/plugins/replication/ && git checkout stable-${GERRIT_VERSION}
+cd /build/gerrit/plugins/replication/ && git checkout v${GERRIT_VERSION}
 
 rm -rf /build/gerrit/plugins/download-commands 
 git clone https://gerrit.googlesource.com/plugins/download-commands /build/gerrit/plugins/download-commands 
-cd /build/gerrit/plugins/download-commands  && git checkout stable-${GERRIT_VERSION}
+cd /build/gerrit/plugins/download-commands  && git checkout v${GERRIT_VERSION}
 
 rm -rf /build/gerrit/plugins/reviewnotes
 git clone https://gerrit.googlesource.com/plugins/reviewnotes /build/gerrit/plugins/reviewnotes
