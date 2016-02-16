@@ -4,7 +4,7 @@ set -euo pipefail
 if [ "$1" = 'gerrit' ]; then
     # Run init on the data directory
     # Copy all plugins for the first time
-    if [ -e "/home/gerrit/data/plugins/.plugins-${GERRIT_VERSION}" ]; then
+    if [ ! -e "/home/gerrit/data/plugins/.plugins-${GERRIT_VERSION}" ]; then
         cp /home/gerrit/plugins/* /home/gerrit/data/plugins/
         touch /home/gerrit/data/plugins/.plugins-${GERRIT_VERSION}
     fi;
