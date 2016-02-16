@@ -6,38 +6,37 @@ rm -rf /buil/gerrit/plugins/gerrit-oauth-provider
 
 if [ ! -d "/build/gerrit/.git" ]; then
     git clone https://gerrit.googlesource.com/gerrit /build/gerrit
-else
-    cd /build/gerrit && git pull
 fi;
 
 cd /build/gerrit && git checkout stable-${GERRIT_VERSION}
 
 if [ ! -d "/build/buck/.git" ]; then
     git clone https://github.com/facebook/buck  /build/buck
-else
-    cd /build/buck && git pull
 fi;
 
 cd /build/buck && git checkout $(cat ../gerrit/.buckversion)
 
 ant
-mkdir /build/bin
+mkdir -p /build/bin
 export PATH=/build/bin:$PATH
 
-ln -s `pwd`/bin/buck /build/bin/
-ln -s `pwd`/bin/buckd /build/bin/
+ln -sf `pwd`/bin/buck /build/bin/
+ln -sf `pwd`/bin/buckd /build/bin/
 
-cd /build/gerrit 
-buck build gerrit
-
-
+rm -rf /build/gerrit/plugins/gitiles
 git clone --recursive https://gerrit.googlesource.com/plugins/gitiles /build/gerrit/plugins/gitiles
 cd /build/gerrit/plugins/gitiles && git checkout stable-${GERRIT_VERSION}
+rm -rf /build/gerrit/plugins/gerrit-oauth-provider
 git clone --recursive https://github.com/davido/gerrit-oauth-provider.git /build/gerrit/plugins/gerrit-oauth-provider
+rm -rf /build/gerrit/plugins/avatars-gravatar
 git clone --recursive https://gerrit.googlesource.com/plugins/avatars-gravatar /build/gerrit/plugins/avatars-gravatar
+rm -rf /build/gerrit/plugins/plugin-manager
 git clone --recursive https://gerrit.googlesource.com/plugins/plugin-manager /build/gerrit/plugins/plugin-manager
+rm -rf /build/gerrit/plugins/delete-project
 git clone --recursive https://gerrit.googlesource.com/plugins/delete-project /build/gerrit/plugins/delete-project
+rm -rf /build/gerrit/plugins/admin-console
 git clone --recursive https://gerrit.googlesource.com/plugins/admin-console  /build/gerrit/plugins/admin-console
+rm -rf /build/gerrit/plugins/branch-network
 git clone --recursive https://gerrit.googlesource.com/plugins/branch-network /build/gerrit/plugins/branch-network
 
 rm -rf /build/gerrit/plugins/commit-message-length-validator/
@@ -45,7 +44,7 @@ git clone https://gerrit.googlesource.com/plugins/commit-message-length-validato
 cd /build/gerrit/plugins/commit-message-length-validator/ && git checkout stable-${GERRIT_VERSION}
 
 rm -rf /build/gerrit/plugins/replication/
-gt clone https://gerrit.googlesource.com/plugins/replication /build/gerrit/plugins/replication/
+git clone https://gerrit.googlesource.com/plugins/replication /build/gerrit/plugins/replication/
 cd /build/gerrit/plugins/replication/ && git checkout stable-${GERRIT_VERSION}
 
 rm -rf /build/gerrit/plugins/download-commands 
@@ -62,6 +61,8 @@ cd /build/gerrit/plugins/singleusergroup && git checkout v${GERRIT_VERSION}
 
 
 cd /build/gerrit
+buck build gerrit
+
 buck build plugins/singleusergroup:singleusergroup
 buck build plugins/reviewnotes:reviewnotes
 buck build plugins/commit-message-length-validator:commit-message-length-validator

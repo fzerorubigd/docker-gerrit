@@ -1,4 +1,4 @@
-FROM jdk:latest
+FROM java:latest
 MAINTAINER fzerorubigd <fzero@rubi.gd>
 
 ENV GERRIT_VERSION 2.12
