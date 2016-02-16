@@ -1,12 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
-rm -rf /buil/gerrit/plugins/gerrit-oauth-provider
-
-
 if [ ! -d "/build/gerrit/.git" ]; then
     git clone https://gerrit.googlesource.com/gerrit /build/gerrit
 fi;
+
+# Remove all old plugins 
+rm -rf /build/gerrit/plugins/
+# Reset the plugin directory
+cd /build/gerrit && git reset --hard
 
 cd /build/gerrit && git checkout stable-${GERRIT_VERSION}
 
